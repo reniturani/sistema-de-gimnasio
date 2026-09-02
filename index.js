@@ -4,11 +4,6 @@ const PORT = 3000;
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.send('¡Servidor del Gimnasio funcionando correctamente!');
-});
-
-
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`servidor corriendo en http://localhost:${PORT}`);
 });
