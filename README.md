@@ -27,7 +27,6 @@ disponibles.
 - Visualización de clases
 - Inscripción a clases
 - Cancelación de inscripciones
-- Consulta de inscripciones
 
 ## Integrantes
 
@@ -41,12 +40,12 @@ disponibles.
 - CSS
 - JavaScript
 - Node.js, Express.js
-- Control de versiones: Git y GitHub
 - SQLite/postgresql
+- Control de versiones: Git y GitHub
 
 ## Dependencias
-`express`: Framework para el desarrollo del servidor web y manejo de rutas HTTP.
-SQLite/postgresql
+- express: Framework para el desarrollo del servidor web y manejo de rutas HTTP.
+- SQLite/postgresql
 
 ## Requisitos
 - Node,js (version 18 o superior)
