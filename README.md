@@ -40,16 +40,18 @@ disponibles.
 - HTML
 - CSS
 - JavaScript
-- Git
-- GitHub
+- Node.js, Express.js
+- Control de versiones: Git y GitHub
+- SQLite/postgresql
 
 ## Dependencias
-
+`express`: Framework para el desarrollo del servidor web y manejo de rutas HTTP.
 SQLite/postgresql
 
 ## Requisitos
-
+- Node,js (version 18 o superior)
 - Navegador web
+- Git
 
 ## Instalación y ejecución
 
