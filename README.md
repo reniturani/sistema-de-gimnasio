@@ -44,6 +44,7 @@ disponibles.
 
 ## Dependencias
 - express: Framework para el desarrollo del servidor web y manejo de rutas HTTP.
+- dotenv: Permite cargar las variables de configuración desde el archivo `.env`.
 
 ## Requisitos
 - Node,js (version 18 o superior)
