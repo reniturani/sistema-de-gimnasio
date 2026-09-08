@@ -42,29 +42,18 @@ disponibles.
 - Node.js, Express.js
 - Control de versiones: Git y GitHub
 
-## Herramientas
- - Git y GitHub
- - Postman: utilizado para probar y verificar los endpoints de la API.
-
 ## Dependencias
 - express: Framework para el desarrollo del servidor web y manejo de rutas HTTP.
-- dotenv: Permite cargar variables de configuración desde el archivo `.env`.
 
 ## Requisitos
 - Node,js (version 18 o superior)
 - Navegador web
 - Git
 
-## Configuracion de variables de entorno 
-
-El proyecto utiliza un archivo `.env` para almacenar variables de configuración de forma local.
-
-
 ## Instalación y ejecución
 
 1. Clonar el repositorio.
 2. Abrir la carpeta del proyecto.
-3. Configurar las variables de entorno según la sección correspondiente.
-4. Abrir el archivo `index.html` en un navegador con Open with Live Server
+3. Abrir el archivo `index.html` en un navegador con Open with Live Server
 
 ---
