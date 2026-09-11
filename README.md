@@ -55,6 +55,7 @@ disponibles.
 
 1. Clonar el repositorio.
 2. Abrir la carpeta del proyecto.
-3. Abrir el archivo `index.html` en un navegador con Open with Live Server
+3. Instalar dependencias con npm install
+4. Abrir el archivo `index.html` en un navegador con Open with Live Server
 
 ---
