@@ -54,8 +54,13 @@ disponibles.
 ## Instalación y ejecución
 
 1. Clonar el repositorio.
+   Abrir una terminal y ejecutar: git clone https://github.com/reniturani/sistema-de-gimnasio.git
 2. Abrir la carpeta del proyecto.
+   En la terminal, con el comando: cd sistema-de-gimnasio
 3. Instalar dependencias con npm install
-4. Abrir el archivo `index.html` en un navegador con Open with Live Server
+   En la terminal, con el comando: npm install
+4. Ejecutar el archivo.
+   Abrir el archivo `index.html` en Visual Studio Code. Luego, hacer clic derecho sobre el archivo y seleccionar Open with Live Server para visualizar la aplicación en el navegador.
+   
 
 ---
