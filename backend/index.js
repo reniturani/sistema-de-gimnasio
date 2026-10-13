@@ -5,7 +5,7 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-const clasesRoutes = require('./routes/clases.routes');
+const clasesRoutes = require('./routes/clasesRoutes');
 
 app.use(express.json());
 app.use('/clases', clasesRoutes);
