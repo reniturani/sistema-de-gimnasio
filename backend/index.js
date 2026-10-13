@@ -5,8 +5,11 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+const clasesRoutes = require('./routes/clasesRoutes');
+
 app.use(express.json());
+app.use('/clases', clasesRoutes);
 
 app.listen(PORT, () => {
-    console.log(`servidor corriendo en http://localhost:${PORT}`);
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
