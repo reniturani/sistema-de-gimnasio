@@ -5,11 +5,3 @@ function obtenerClases(req, res) {
 }
 
 module.exports = { obtenerClases };
-const express = require('express');
-const router = express.Router();
-
-const { obtenerClases } = require('../controllers/clases.controller');
-
-router.get('/', obtenerClases);
-
-module.exports = router;
