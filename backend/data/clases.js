@@ -1,6 +1,3 @@
-const express = require('express');
-const router = express.Router();
-
 const clases = [
     {
         id: 1,
@@ -13,11 +10,13 @@ const clases = [
         nombre: 'CrossFit',
         horario: 'Miercoles de 08:00 a 09:00',
         cupoMaximo: 12
+    },
+    {
+        id: 3,
+        nombre: 'Pilates',
+        horario: 'Viernes de 17:00 a 18:00',
+        cupoMaximo: 10
     }
 ];
 
-router.get('/', (req, res) => {
-    res.json(clases);
-});
-
-module.exports = router;
+module.exports = clases;
