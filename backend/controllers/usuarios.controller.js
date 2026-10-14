@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 async function registrarUsuario(req, res) { //registro de usuario
     try {
         const { nombre, email, password } = req.body;
+        const emailNormalizado = email.trim().toLowerCase();
 
         if (!nombre || !email || !password) {
             return res.status(400).json({
@@ -13,7 +14,7 @@ async function registrarUsuario(req, res) { //registro de usuario
         }
 
         const emailExiste = usuarios.some(
-            usuario => usuario.email === email
+        usuario => usuario.email === emailNormalizado
         );
 
         if (emailExiste) {
@@ -27,7 +28,7 @@ async function registrarUsuario(req, res) { //registro de usuario
         const nuevoUsuario = {
             id: usuarios.length + 1,
             nombre,
-            email,
+            email: emailNormalizado,
             password: passwordHash
         };
 
@@ -39,6 +40,7 @@ async function registrarUsuario(req, res) { //registro de usuario
                 id: nuevoUsuario.id,
                 nombre: nuevoUsuario.nombre,
                 email: nuevoUsuario.email
+                
             }
         });
     } catch (error) {
@@ -48,50 +50,4 @@ async function registrarUsuario(req, res) { //registro de usuario
     }
 }
 
-async function iniciarSesion(req, res) { //inicio de sesion
-    try {
-        const { email, password } = req.body;
-
-        if (!email || !password) {
-            return res.status(400).json({
-                mensaje: 'El email y la contraseña son obligatorios'
-            });
-        }
-
-        const usuario = usuarios.find(
-            usuario => usuario.email === email
-        );
-
-        if (!usuario) {
-            return res.status(401).json({
-                mensaje: 'Email o contraseña incorrectos'
-            });
-        }
-
-        const passwordValida = await bcrypt.compare(
-            password,
-            usuario.password
-        );
-
-        if (!passwordValida) {
-            return res.status(401).json({
-                mensaje: 'Email o contraseña incorrectos'
-            });
-        }
-
-        return res.status(200).json({
-            mensaje: 'Inicio de sesión exitoso',
-            usuario: {
-                id: usuario.id,
-                nombre: usuario.nombre,
-                email: usuario.email
-            }
-        });
-    } catch (error) {
-        return res.status(500).json({
-            mensaje: 'Error al iniciar sesión'
-        });
-    }
-}
-
-module.exports = { registrarUsuario, iniciarSesion };
+module.exports = { registrarUsuario };

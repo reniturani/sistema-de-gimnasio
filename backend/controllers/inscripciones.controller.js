@@ -4,13 +4,14 @@ const usuarios = require('../data/usuarios');
 const clases = require('../data/clases');
 
 function inscribirse(req, res) {
-    const { usuarioId, claseId } = req.body;
+const usuarioId = req.usuario.id;
+const { claseId } = req.body;
 
-    if (!usuarioId || !claseId) {
-        return res.status(400).json({
-            mensaje: 'El usuarioId y el claseId son obligatorios'
-        });
-    }
+    if (!claseId) {
+    return res.status(400).json({
+        mensaje: 'El claseId es obligatorio'
+    });
+}
 
     const usuarioExiste = usuarios.some(
         usuario => usuario.id === Number(usuarioId)
@@ -68,24 +69,35 @@ function inscribirse(req, res) {
     });
 }
 
+
 function cancelarInscripcion(req, res) {
     const { id } = req.params;
 
-    const indice = inscripciones.findIndex(
+    const inscripcion = inscripciones.find(
         inscripcion => inscripcion.id === Number(id)
     );
 
-    if (indice === -1) {
+    if (!inscripcion) {
         return res.status(404).json({
             mensaje: 'La inscripción no existe'
         });
     }
 
-    const inscripcionEliminada = inscripciones.splice(indice, 1);
+    if (inscripcion.usuarioId !== req.usuario.id) {
+        return res.status(403).json({
+            mensaje: 'No podés cancelar una inscripción de otro usuario'
+        });
+    }
+
+    const indice = inscripciones.findIndex(
+        inscripcion => inscripcion.id === Number(id)
+    );
+
+    inscripciones.splice(indice, 1);
 
     return res.status(200).json({
         mensaje: 'Inscripción cancelada correctamente',
-        inscripcion: inscripcionEliminada[0]
+        inscripcion
     });
 }
 

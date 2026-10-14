@@ -7,7 +7,11 @@ const {
     cancelarInscripcion
 } = require('../controllers/inscripciones.controller');
 
-router.post('/', inscribirse);
-router.delete('/:id', cancelarInscripcion);
+const {
+    verificarToken
+} = require('../middlewares/auth.middleware');
+
+router.post('/', verificarToken, inscribirse);
+router.delete('/:id', verificarToken, cancelarInscripcion);
 
 module.exports = router;
