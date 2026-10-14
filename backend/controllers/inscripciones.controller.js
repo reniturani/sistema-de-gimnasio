@@ -68,4 +68,26 @@ function inscribirse(req, res) {
     });
 }
 
-module.exports = { inscribirse };
+function cancelarInscripcion(req, res) {
+    const { id } = req.params;
+
+    const indice = inscripciones.findIndex(
+        inscripcion => inscripcion.id === Number(id)
+    );
+
+    if (indice === -1) {
+        return res.status(404).json({
+            mensaje: 'La inscripción no existe'
+        });
+    }
+
+    const inscripcionEliminada = inscripciones.splice(indice, 1);
+
+    return res.status(200).json({
+        mensaje: 'Inscripción cancelada correctamente',
+        inscripcion: inscripcionEliminada[0]
+    });
+}
+
+
+module.exports = { inscribirse, cancelarInscripcion };
