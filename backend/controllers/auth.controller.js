@@ -8,14 +8,17 @@ async function iniciarSesion(req, res) {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.status(400).json({
-                mensaje: 'El email y la contraseña son obligatorios'
-            });
-        }
+        return res.status(400).json({
+            mensaje: 'El email y la contraseña son obligatorios'
+    });
+    }
 
-        const usuario = usuarios.find(
-            usuario => usuario.email === email
-        );
+    const emailNormalizado = email.trim().toLowerCase();
+
+    const usuario = usuarios.find(
+    usuario => usuario.email === emailNormalizado
+    );
+
 
         if (!usuario) {
             return res.status(401).json({

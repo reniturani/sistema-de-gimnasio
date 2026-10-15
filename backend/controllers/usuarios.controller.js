@@ -5,13 +5,14 @@ const bcrypt = require('bcryptjs');
 async function registrarUsuario(req, res) { //registro de usuario
     try {
         const { nombre, email, password } = req.body;
-        const emailNormalizado = email.trim().toLowerCase();
 
-        if (!nombre || !email || !password) {
-            return res.status(400).json({
-                mensaje: 'Todos los campos son obligatorios'
-            });
-        }
+    if (!nombre || !email || !password) {
+    return res.status(400).json({
+        mensaje: 'Todos los campos son obligatorios'
+    });
+    }
+
+const emailNormalizado = email.trim().toLowerCase();
 
         const emailExiste = usuarios.some(
         usuario => usuario.email === emailNormalizado

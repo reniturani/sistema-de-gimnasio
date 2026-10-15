@@ -7,9 +7,9 @@ function inscribirse(req, res) {
 const usuarioId = req.usuario.id;
 const { claseId } = req.body;
 
-    if (!claseId) {
+    if (!Number.isInteger(Number(claseId)) || Number(claseId) <= 0) {
     return res.status(400).json({
-        mensaje: 'El claseId es obligatorio'
+        mensaje: 'El claseId debe ser un número entero positivo'
     });
 }
 
