@@ -13,50 +13,50 @@ const { claseId } = req.body;
     });
 }
 
-    const usuarioExiste = usuarios.some(
+    const usuarioExiste = usuarios.some( //buscamos si el usuario existe
         usuario => usuario.id === Number(usuarioId)
     );
 
-    if (!usuarioExiste) {
+    if (!usuarioExiste) { //si no existe
         return res.status(404).json({
             mensaje: 'El usuario no existe'
         });
     }
 
-    const clase = clases.find(
-        clase => clase.id === Number(claseId)
+    const clase = clases.find( //buscamos la clase
+        clase => clase.id === Number(claseId) //si la clase coincide con la que buscamos
     );
 
     if (!clase) {
-        return res.status(404).json({
+        return res.status(404).json({ //si no existe
             mensaje: 'La clase no existe'
         });
     }
 
-    const yaInscripto = inscripciones.some(
+    const yaInscripto = inscripciones.some( //buscamos si el usuario ya esta inscripto en la clase
         inscripcion =>
-            inscripcion.usuarioId === Number(usuarioId) &&
+            inscripcion.usuarioId === Number(usuarioId) && //si el usuario y la clase son iguales
             inscripcion.claseId === Number(claseId)
     );
 
-    if (yaInscripto) {
+    if (yaInscripto) { //si ya esta inscripto
         return res.status(409).json({
             mensaje: 'El usuario ya está inscripto en esta clase'
         });
     }
 
-    const inscriptosEnClase = inscripciones.filter(
-        inscripcion => inscripcion.claseId === Number(claseId)
-    ).length;
+    const inscriptosEnClase = inscripciones.filter( //busca todas las inscripciones que corresponden a esa clase
+        inscripcion => inscripcion.claseId === Number(claseId) //si la clase es la que buscamos
+    ).length; //cuenta cuantos usuarios estan inscriptos
 
-    if (inscriptosEnClase >= clase.cupoMaximo) {
+    if (inscriptosEnClase >= clase.cupoMaximo) { //si la cantidad de inscriptos es mayor o igual al cupo
         return res.status(409).json({
             mensaje: 'La clase no tiene cupos disponibles'
         });
     }
 
-    const nuevaInscripcion = {
-        id: inscripciones.length + 1,
+    const nuevaInscripcion = { //creamos la inscripcion
+        id: inscripciones.length + 1, //el id es el numero de inscripciones + 1
         usuarioId: Number(usuarioId),
         claseId: Number(claseId)
     };
@@ -83,17 +83,17 @@ function cancelarInscripcion(req, res) {
         });
     }
 
-    if (inscripcion.usuarioId !== req.usuario.id) {
-        return res.status(403).json({
+    if (inscripcion.usuarioId !== req.usuario.id) { 
+        return res.status(403).json({ //usuario autenticado no tiene permiso de cancelar la inscripcion
             mensaje: 'No podés cancelar una inscripción de otro usuario'
         });
     }
 
-    const indice = inscripciones.findIndex(
-        inscripcion => inscripcion.id === Number(id)
+    const indice = inscripciones.findIndex( //busca el indice de la inscripcion
+        inscripcion => inscripcion.id === Number(id) //convierte el ID recibido en número para compararlo con el ID almacenado
     );
 
-    inscripciones.splice(indice, 1);
+    inscripciones.splice(indice, 1); //elimina un elemento del arreglo desde esa posición
 
     return res.status(200).json({
         mensaje: 'Inscripción cancelada correctamente',

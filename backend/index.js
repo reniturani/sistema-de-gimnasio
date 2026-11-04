@@ -10,7 +10,7 @@ const usuariosRoutes = require('./routes/usuarios.routes');
 const inscripcionesRoutes = require('./routes/inscripciones.routes');
 const authRoutes = require('./routes/auth.routes');
 
-app.use(express.json());
+app.use(express.json()); //para que express entienda el json
 
 app.use('/clases', clasesRoutes);
 app.use('/usuarios', usuariosRoutes);
