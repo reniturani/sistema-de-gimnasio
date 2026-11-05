@@ -13,9 +13,9 @@ async function iniciarSesion(req, res) {
     });
     }
 
-    const emailNormalizado = email.trim().toLowerCase();
+    const emailNormalizado = email.trim().toLowerCase(); //normalizamos el email para que quede en minuscula y sin espacios
 
-    const usuario = usuarios.find(
+    const usuario = usuarios.find( //buscamos el usuario 
     usuario => usuario.email === emailNormalizado
     );
 
@@ -26,27 +26,27 @@ async function iniciarSesion(req, res) {
             });
         }
 
-        const passwordValida = await bcrypt.compare(
+        const passwordValida = await bcrypt.compare( //compara la contraseña introducida por el usuario con hash almacenado
             password,
             usuario.password
         );
 
-        if (!passwordValida) {
+        if (!passwordValida) { //si la contraseña es incorrecta
             return res.status(401).json({
                 mensaje: 'Email o contraseña incorrectos'
             });
         }
 
-        const token = jwt.sign(
+        const token = jwt.sign( //creamos el token con el id y el email 
             {
                 id: usuario.id,
                 email: usuario.email
             },
-            process.env.JWT_SECRET,
-            { expiresIn: '2h' }
+            process.env.JWT_SECRET, //la clave secreta para generar el token
+            { expiresIn: '2h' } //el token expira en 2 horas
         );
 
-        return res.status(200).json({
+        return res.status(200).json({ //devolvemos el token y el usuario
             mensaje: 'Inicio de sesión exitoso',
             token,
             usuario: {
@@ -56,7 +56,7 @@ async function iniciarSesion(req, res) {
             }
         });
     } catch (error) {
-        console.error('Error en iniciarSesion:', error);
+        console.error('Error en iniciarSesion:', error); 
 
         return res.status(500).json({
             mensaje: 'Error al iniciar sesión'

@@ -11,7 +11,7 @@ const inscripcionesRoutes = require('./routes/inscripciones.routes');
 const authRoutes = require('./routes/auth.routes');
 const cuotasRoutes = require('./routes/cuotas.routes');
 
-app.use(express.json());
+app.use(express.json()); //para que express entienda el json
 
 app.use('/clases', clasesRoutes);
 app.use('/usuarios', usuariosRoutes);
