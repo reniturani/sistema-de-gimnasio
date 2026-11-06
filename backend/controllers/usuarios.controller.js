@@ -1,22 +1,42 @@
-
 const usuarios = require('../data/usuarios');
 const bcrypt = require('bcryptjs');
 
-async function registrarUsuario(req, res) { //registro de usuario
+// Expresión regular para validar formato de correo electrónico
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+async function registrarUsuario(req, res) { // registro de usuario
     try {
-        const { nombre, email, password } = req.body; //obtenemos los datos del body
+        const { nombre, email, password } = req.body;
 
-    if (!nombre || !email || !password) { //si alguno de los campos esta vacio
-    return res.status(400).json({
-        mensaje: 'Todos los campos son obligatorios'
-    });
-    }
+        if (!nombre || !email || !password) {
+            return res.status(400).json({
+                mensaje: 'Todos los campos son obligatorios'
+            });
+        }
 
-const emailNormalizado = email.trim().toLowerCase(); //trim quita los espacios en blanco al principio y al final,
-                                                    //toLowerCase pasa todo a minuscula
+        const nombreLimpio = nombre.trim();
+        const emailNormalizado = email.trim().toLowerCase();
 
-        const emailExiste = usuarios.some( //comprueba si ya existe un usuario cuyo email coincide con el email normalizado
-        usuario => usuario.email === emailNormalizado
+        if (nombreLimpio.length === 0) {
+            return res.status(400).json({
+                mensaje: 'El nombre no puede estar vacío'
+            });
+        }
+
+        if (!EMAIL_REGEX.test(emailNormalizado)) {
+            return res.status(400).json({
+                mensaje: 'El formato del email no es válido'
+            });
+        }
+
+        if (password.length < 6) {
+            return res.status(400).json({
+                mensaje: 'La contraseña debe tener al menos 6 caracteres'
+            });
+        }
+
+        const emailExiste = usuarios.some(
+            usuario => usuario.email === emailNormalizado
         );
 
         if (emailExiste) {
@@ -25,16 +45,16 @@ const emailNormalizado = email.trim().toLowerCase(); //trim quita los espacios e
             });
         }
 
-        const passwordHash = await bcrypt.hash(password, 10); //encriptamos la contraseña con bcrypt
+        const passwordHash = await bcrypt.hash(password, 10);
 
-        const nuevoUsuario = { //creamos el nuevo usuario con `id`, `nombre`, `email` y `password`
+        const nuevoUsuario = {
             id: usuarios.length + 1,
-            nombre,
-            email: emailNormalizado, //emailNormalizado para que quede en minuscula y sin espacios
-            password: passwordHash //guarda el hash en lugar de la contraseña original
+            nombre: nombreLimpio,
+            email: emailNormalizado,
+            password: passwordHash
         };
 
-        usuarios.push(nuevoUsuario); //agregamos el nuevo usuario
+        usuarios.push(nuevoUsuario);
 
         return res.status(201).json({
             mensaje: 'Usuario registrado correctamente',
@@ -42,7 +62,6 @@ const emailNormalizado = email.trim().toLowerCase(); //trim quita los espacios e
                 id: nuevoUsuario.id,
                 nombre: nuevoUsuario.nombre,
                 email: nuevoUsuario.email
-                //no devolvemos la contraseña
             }
         });
     } catch (error) {

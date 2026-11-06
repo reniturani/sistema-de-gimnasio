@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -12,6 +13,7 @@ const authRoutes = require('./routes/auth.routes');
 const cuotasRoutes = require('./routes/cuotas.routes');
 
 app.use(express.json()); //para que express entienda el json
+app.use(cors());
 
 app.use('/clases', clasesRoutes);
 app.use('/usuarios', usuariosRoutes);
