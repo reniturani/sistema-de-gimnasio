@@ -194,8 +194,6 @@ Las operaciones `POST /inscripciones` y `DELETE /inscripciones/:id` se conectan 
 
 La función `inscribirse` verifica la existencia del usuario y de la clase, evita inscripciones duplicadas y comprueba la disponibilidad de cupos. La función `cancelarInscripcion` comprueba que la inscripción exista y que pertenezca al usuario autenticado antes de eliminarla.
 
-Estas referencias deben cotejarse con la versión final del repositorio antes de presentar el documento, especialmente si se modifican los nombres de los archivos o las funciones.
-
 ### 5.2. Beneficios obtenidos
 
 La organización elegida ofrece los siguientes beneficios:

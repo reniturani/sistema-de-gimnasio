@@ -1,24 +1,23 @@
-
 const usuarios = require('../data/usuarios');
 const bcrypt = require('bcryptjs');
 
-// expresion para validar que el email tenga formato de correo real
+// Expresión regular para validar formato de correo electrónico
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-async function registrarUsuario(req, res) { //registro de usuario
+async function registrarUsuario(req, res) { // registro de usuario
     try {
         const { nombre, email, password } = req.body;
 
-    if (!nombre || !email || !password) {
-    return res.status(400).json({
-        mensaje: 'Todos los campos son obligatorios'
-    });
-    }
+        if (!nombre || !email || !password) {
+            return res.status(400).json({
+                mensaje: 'Todos los campos son obligatorios'
+            });
+        }
 
-const nombreLimpio = nombre.trim();
-const emailNormalizado = email.trim().toLowerCase();
+        const nombreLimpio = nombre.trim();
+        const emailNormalizado = email.trim().toLowerCase();
 
-if (nombreLimpio.length === 0) {
+        if (nombreLimpio.length === 0) {
             return res.status(400).json({
                 mensaje: 'El nombre no puede estar vacío'
             });
@@ -37,7 +36,7 @@ if (nombreLimpio.length === 0) {
         }
 
         const emailExiste = usuarios.some(
-        usuario => usuario.email === emailNormalizado
+            usuario => usuario.email === emailNormalizado
         );
 
         if (emailExiste) {
@@ -63,7 +62,6 @@ if (nombreLimpio.length === 0) {
                 id: nuevoUsuario.id,
                 nombre: nuevoUsuario.nombre,
                 email: nuevoUsuario.email
-                
             }
         });
     } catch (error) {

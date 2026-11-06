@@ -17,6 +17,8 @@ const clases = [
         horario: 'Viernes de 17:00 a 18:00',
         cupoMaximo: 10
     }
+
+
 ];
 
 module.exports = clases;
