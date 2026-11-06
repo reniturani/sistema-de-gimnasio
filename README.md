@@ -32,7 +32,6 @@ disponibles.
 
 - Turani Renata
 - Surop Maitena
-- Vignales Federica
 
 ## Tecnologías
 
