@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/layout/Navbar';
 import { ProtectedRoute } from './components/layout/ProtectedRoute';
 import { CalculadoraCuotas } from './pages/CalculadoraCuotas';
+import { Bienvenida } from './pages/Bienvenida';
 
 // componentes temporales
 const Home = () => <div style={{padding: '64px'}}><h1 className="display-text">Bienvenido al Club</h1></div>;
@@ -19,7 +20,7 @@ function App() {
       
       <Routes>
         {/* Rutas Públicas */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Bienvenida />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/clases" element={<Clases />} />
