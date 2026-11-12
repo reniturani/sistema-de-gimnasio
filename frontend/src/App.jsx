@@ -3,12 +3,11 @@ import { Navbar } from './components/layout/Navbar';
 import { ProtectedRoute } from './components/layout/ProtectedRoute';
 import { CalculadoraCuotas } from './pages/CalculadoraCuotas';
 import { Bienvenida } from './pages/Bienvenida';
+import { Registro } from './pages/Registro';
+import { Login } from './pages/Login';
+import { Clases } from './pages/Clases';
 
-// componentes temporales
-const Home = () => <div style={{padding: '64px'}}><h1 className="display-text">Bienvenido al Club</h1></div>;
-const Login = () => <div style={{padding: '64px'}}>Pantalla de Login (Tarea de mai)</div>;
-const Registro = () => <div style={{padding: '64px'}}>Pantalla de Registro (Tarea de mai)</div>;
-const Clases = () => <div style={{padding: '64px'}}>Catálogo de Clases (Tarea de mai)</div>;
+
 
 // mis componentes pendientes (reni)
 const Dashboard = () => <div style={{padding: '64px'}}>Mis Inscripciones y Cancelación (Tu tarea)</div>;

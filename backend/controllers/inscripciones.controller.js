@@ -100,6 +100,24 @@ function cancelarInscripcion(req, res) {
         inscripcion
     });
 }
+function obtenerMisInscripciones(req, res) {
+    const usuarioId = req.usuario.id;
+
+    const misInscripciones = inscripciones
+        .filter(inscripcion => inscripcion.usuarioId === Number(usuarioId))
+        .map(inscripcion => {
+            const clase = clases.find(
+                clase => clase.id === inscripcion.claseId
+            );
+
+            return {
+                ...inscripcion,
+                clase
+            };
+        });
+
+    return res.status(200).json(misInscripciones);
+}
 
 
-module.exports = { inscribirse, cancelarInscripcion };
+module.exports = { inscribirse, cancelarInscripcion, obtenerMisInscripciones };
