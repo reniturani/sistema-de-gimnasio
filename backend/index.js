@@ -1,0 +1,26 @@
+require('dotenv').config();
+
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+const PORT = process.env.PORT || 3000;
+
+const clasesRoutes = require('./routes/clasesRoutes');
+const usuariosRoutes = require('./routes/usuarios.routes');
+const inscripcionesRoutes = require('./routes/inscripciones.routes');
+const authRoutes = require('./routes/auth.routes');
+const cuotasRoutes = require('./routes/cuotas.routes');
+
+app.use(express.json()); //para que express entienda el json
+app.use(cors());
+
+app.use('/clases', clasesRoutes);
+app.use('/usuarios', usuariosRoutes);
+app.use('/inscripciones', inscripcionesRoutes);
+app.use('/auth', authRoutes);
+app.use('/cuotas', cuotasRoutes);
+
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
