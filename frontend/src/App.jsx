@@ -6,11 +6,7 @@ import { Bienvenida } from './pages/Bienvenida';
 import { Registro } from './pages/Registro';
 import { Login } from './pages/Login';
 import { Clases } from './pages/Clases';
-
-
-
-// mis componentes pendientes (reni)
-const Dashboard = () => <div style={{padding: '64px'}}>Mis Inscripciones y Cancelación (Tu tarea)</div>;
+import { Dashboard } from './pages/Dashboard';
 
 function App() {
   return (
