@@ -5,23 +5,23 @@ export function CalculadoraCuotas() {
     const [tipoPlan, setTipoPlan] = useState('estandar');
     const [resultado, setResultado] = useState(null);
 
-    const consultarCuota = async () => {
-        try {
-            const respuesta = await fetch('http://localhost:3000/cuotas/calcular', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ frecuencia, tipoPlan })
-            });
-            const data = await respuesta.json();
-            if (respuesta.ok) {
-                setResultado(data);
-            }
-        } catch (error) {
-            console.error("Error al consultar la cuota:", error);
-        }
-    };
-
     useEffect(() => {
+        const consultarCuota = async () => {
+            try {
+                const respuesta = await fetch('http://localhost:3000/cuotas/calcular', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ frecuencia, tipoPlan })
+                });
+                const data = await respuesta.json();
+                if (respuesta.ok) {
+                    setResultado(data);
+                }
+            } catch (error) {
+                console.error("Error al consultar la cuota:", error);
+            }
+        };
+
         consultarCuota();
     }, [frecuencia, tipoPlan]);
 
