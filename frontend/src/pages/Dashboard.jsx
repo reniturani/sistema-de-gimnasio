@@ -8,29 +8,6 @@ export function Dashboard() {
     // obtener el token guardado por el login
     const token = localStorage.getItem('token');
 
-    // visualizacion de las inscripciones del usuario
-    const cargarInscripciones = async () => {
-        try {
-            const respuesta = await fetch('http://localhost:3000/inscripciones', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` // Enviamos el token al middleware
-                }
-            });
-
-            if (!respuesta.ok) {
-                throw new Error('Error al cargar tus inscripciones');
-            }
-
-            const data = await respuesta.json();
-            setMisInscripciones(data); // data es el array que devuelve obtenerMisInscripciones()
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setCargando(false);
-        }
-    };
 
     // cancelacion de inscripciones
     const handleCancelarInscripcion = async (idInscripcion) => {
@@ -54,14 +31,37 @@ export function Dashboard() {
                 const data = await respuesta.json();
                 alert(`No se pudo cancelar: ${data.mensaje}`);
             }
-        } catch (err) {
+        } catch {
             alert('Ocurrió un error al intentar cancelar la inscripción.');
         }
     };
 
     useEffect(() => {
-        cargarInscripciones();
-    }, []);
+    const cargarInscripciones = async () => {
+        try {
+            const respuesta = await fetch('http://localhost:3000/inscripciones', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` // Enviamos el token al middleware
+                }
+            });
+
+            if (!respuesta.ok) {
+                throw new Error('Error al cargar tus inscripciones');
+            }
+
+            const data = await respuesta.json();
+            setMisInscripciones(data); // data es el array que devuelve obtenerMisInscripciones()
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setCargando(false);
+        }
+    };
+
+    cargarInscripciones();
+}, [token]);
 
     if (cargando) {
         return <div style={{ padding: '80px 20px', textAlign: 'center' }}>Cargando tus clases...</div>;
@@ -83,6 +83,7 @@ export function Dashboard() {
             {error && (
                 <div style={{ color: 'red', marginBottom: '24px' }}>{error}</div>
             )}
+
 
             {misInscripciones.length === 0 && !error ? (
                 <div style={{ 
